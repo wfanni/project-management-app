@@ -7,6 +7,7 @@ import CreateNewProject from "./components/CreateNewProject";
 import EditProject from "./components/EditProject";
 
 import cover from './assets/projects-cover.jpg';
+import Footer from "./components/Footer";
 
 const PROJECTS = [];
 
@@ -59,8 +60,6 @@ export default function App() {
       });
     }
   }
-  // console.log(PROJECTS);
-  // console.log(projectSelected);
 
   return (
     <div className="font-main">
@@ -100,6 +99,7 @@ export default function App() {
           ) : null}
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

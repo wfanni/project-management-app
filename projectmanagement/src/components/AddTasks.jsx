@@ -72,7 +72,7 @@ export default function AddTasks({
         </div>
       ) : listOfCompletedTasks.length > 0 && tasks.length === 0 ? (
         <div className="w-full h-max py-4 flex flex-col gap-4 justify-center items-center">
-          <i class="fa-solid fa-champagne-glasses text-5xl text-[#f98538]"></i>
+          <i className="fa-solid fa-champagne-glasses text-5xl text-[#f98538]"></i>
           <p>Congrats on completing all your tasks!</p>
 		  <img className="absolute -top-[8rem]" src={firework} />
         </div>
