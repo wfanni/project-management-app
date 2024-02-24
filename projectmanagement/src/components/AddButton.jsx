@@ -1,5 +1,5 @@
-export default function AddButton({ onAdd }) {
+export default function AddButton({ onAdd, style }) {
     return (
-        <button onClick={onAdd} className="w-full text-left px-2 py-1 rounded-sm my-1 font-semibold border-2 border-transparent hover:border-[#4d1a45]">+ Add Project</button>
+        <button onClick={onAdd} className={`${style === "selected" ? "bg-[#8b2e44] text-slate-50" : null} w-full text-left px-2 py-1 border-2 border-[#8b2e44] rounded-md my-1 transition-all duration-200 font-semibold hover:scale-110 active:bg-[#8b2e44] active:text-slate-50 focus:bg-[#8b2e44] focus:text-slate-50`}>+ Add Project</button>
     )
 }

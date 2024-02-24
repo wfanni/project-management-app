@@ -18,7 +18,7 @@ export default function AddProjectForm({ onSave, onClose }) {
     >
       <menu className="flex items-center justify-between gap-4 my-4">
         <div>
-          <i class="fa-solid fa-folder-plus text-4xl px-4"></i>
+          <i className="fa-solid fa-folder-plus text-4xl px-4 text-[#8b2e44]"></i>
         </div>
         <div className="flex items-center gap-4">
           <button

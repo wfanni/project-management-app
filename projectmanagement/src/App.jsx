@@ -46,33 +46,35 @@ export default function App() {
       project["title"] = newTitle;
       project["description"] = newDesc;
       project["dueDate"] = newDate;
-      project["tasks"] = [];
+      project["tasks"] = {};
+      project.tasks["new"] = [];
+      project.tasks["completed"] = null;
       PROJECTS.push(project);
     } else {
       PROJECTS.push({
         title: newTitle,
         description: newDesc,
         dueDate: newDate,
-        tasks: [],
+        tasks: {}, 
       });
     }
   }
-  console.log(PROJECTS);
-  console.log(projectSelected);
+  // console.log(PROJECTS);
+  // console.log(projectSelected);
 
   return (
     <div className="font-main">
       <img className="h-[200px] w-full object-cover" src={cover} />
       <main className="h-screen w-full -mt-8 flex gap-8">
         <Aside>
-          <AddButton onAdd={handleAdd} />
+          <AddButton style={`${!isProjectSelected && formVisible ? "selected" : null}`} onAdd={handleAdd} />
           {PROJECTS.length > 0 && (
             <ul>
               {PROJECTS.map((project, index) => (
                 <li key={project.title} className="font-semibold ">
                   <button
                     onClick={() => handleSelect(project, index)}
-                    className={`w-full text-left px-2 py-1 rounded-sm my-1 border-2 border-transparent hover:border-[#4d1a45] ${projectSelected === project ? "bg-[#4d1a45] text-slate-50 focus-out:bg-transparent focus-out:text-[#4d1a45]" : null}`}
+                    className={`w-full text-left px-2 py-1 rounded-md my-1 border-2 border-transparent hover:border-[#8b2e44] ${projectSelected === project ? "bg-[#8b2e44] text-slate-50 focus-out:bg-transparent focus-out:text-[#8b2e44]" : null}`}
                   >
                     {project.title}
                   </button>
@@ -81,7 +83,7 @@ export default function App() {
             </ul>
           )}
         </Aside>
-        <div className="w-2/4 mt-16 mr-8">
+        <div className="w-full mt-16 mr-8">
           {!formVisible && !isProjectSelected ? (
             <CreateNewProject onAdd={handleAdd} />
           ) : null}
