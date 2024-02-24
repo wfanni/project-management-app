@@ -19,19 +19,19 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a target="_blank" href="https://www.linkedin.com/in/fanni-wihl/">
+              <a target="_blank" href="mailto:fanniwihl@gmail.com">
                 <i className="fa-regular fa-envelope mr-4"></i>
                 fanniwihl@gmail.com
               </a>
             </li>
             <li>
-              <a target="_blank" href="https://www.linkedin.com/in/fanni-wihl/">
+              <a target="_blank" href="https://github.com/wfanni">
                 <i className="fa-brands fa-github mr-4"></i>
                 wfanni
               </a>
             </li>
             <li>
-              <a target="_blank" href="https://www.linkedin.com/in/fanni-wihl/">
+              <a target="_blank" href="https://www.instagram.com/lovelydkl/">
                 <i className="fa-brands fa-instagram mr-4"></i>
                 lovelydkl
               </a>
