@@ -3,27 +3,22 @@ import AddTasks from "./AddTasks";
 import CompletedList from "./CompletedList";
 
 export default function EditProject({ project, index, onDelete, tasks }) {
-  const [tasksCompleted, setTasksCompleted] = useState([]);
   const [, setRefresh] = useState(false);
+  
+  function handleCompletedTasks(newCompletedTask, index) {
+    if (tasks.completed) {
+      tasks.completed.push(newCompletedTask);
 
-  if (
-    tasksCompleted !== null &&
-    tasksCompleted.length > 0 &&
-    project.tasks.new.length > 0
-  ) {
-    project.tasks.completed = tasksCompleted;
-    for (let i = 0; i <= project.tasks.new.length; i++) {
-      for (let x = 0; x <= project.tasks.completed.length; x++) {
-        if (
-          project.tasks.completed[x] !== undefined &&
-          project.tasks.completed[x] === project.tasks.new[i]
-        ) {
-          project.tasks.new.splice(i, 1);
-          setRefresh((prev) => !prev);
+      tasks.completed.forEach((completedTask) => {
+        console.log(completedTask);
+        if (completedTask === tasks.new[index]) {
+          tasks.new.splice(index, 1);
         }
-      }
+      })
     }
+    setRefresh(prev => !prev);
   }
+
   return (
     <div className="flex gap-4">
       <div className="w-2/3 p-4 bg-slate-50 rounded-xl shadow-lg">
@@ -50,11 +45,11 @@ export default function EditProject({ project, index, onDelete, tasks }) {
         </header>
         <AddTasks
           tasks={tasks.new}
-          completedTasks={setTasksCompleted}
-          listOfCompletedTasks={tasksCompleted}
+          completedTasks={tasks.completed}
+          updateCompletedTasks={handleCompletedTasks}
         />
       </div>
-      <CompletedList completedTasks={tasksCompleted}/>
+      <CompletedList completedTasks={tasks.completed}/>
     </div>
   );
 }

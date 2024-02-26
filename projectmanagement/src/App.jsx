@@ -49,14 +49,14 @@ export default function App() {
       project["dueDate"] = newDate;
       project["tasks"] = {};
       project.tasks["new"] = [];
-      project.tasks["completed"] = null;
+      project.tasks["completed"] = [];
       PROJECTS.push(project);
     } else {
       PROJECTS.push({
         title: newTitle,
         description: newDesc,
         dueDate: newDate,
-        tasks: {}, 
+        tasks: {new: [], completed: []}, 
       });
     }
   }

@@ -1,17 +1,34 @@
 import { useRef, useState } from "react";
 import Tasks from "./Tasks";
-import confetti from '../assets/confetti.gif';
-import firework from '../assets/firework.gif';
+import firework from "../assets/firework.gif";
 
 export default function AddTasks({
   tasks,
   completedTasks,
-  listOfCompletedTasks,
+  updateCompletedTasks,
 }) {
   const taskRef = useRef();
 
   const [isError, setIsError] = useState(false);
   const [, setState] = useState(false);
+
+  const isAllTasksCompleted = completedTasks.length > 0 && tasks.length === 0;
+  const isNoTasks = tasks.length === 0 && completedTasks.length === 0;
+  const isTasks = tasks.length > 0;
+
+  const noTasksHTML = (
+    <div className="w-full h-20 flex justify-center items-center">
+      <p>There are no tasks yet for this project.</p>
+    </div>
+  );
+
+  const congratsHTML = (
+    <div className="w-full h-max py-4 flex flex-col gap-4 justify-center items-center">
+      <i className="fa-solid fa-champagne-glasses text-5xl text-[#f98538]"></i>
+      <p>Congrats on completing all your tasks!</p>
+      <img className="absolute -top-[8rem]" src={firework} />
+    </div>
+  );
 
   function handleAddTask(task) {
     if (task === "") {
@@ -19,6 +36,7 @@ export default function AddTasks({
     } else {
       tasks.push(task);
       console.log(tasks);
+      console.log(tasks.length);
       setState((prev) => !prev);
 
       setIsError(false);
@@ -28,26 +46,10 @@ export default function AddTasks({
 
   function handleClear(index) {
     tasks.splice(index, 1);
-    if (
-      completedTasks !== null &&
-      completedTasks.length > 0 &&
-      tasks.length > 0
-    ) {
-      completedTasks = listOfCompletedTasks;
-      for (let i = 0; i <= tasks; i++) {
-        for (let x = 0; x <= completedTasks; x++) {
-          if (
-            completedTasks[x] !== undefined &&
-            completedTasks[x] === tasks[i]
-          ) {
-            tasks.splice(i, 1);
-          }
-        }
-      }
-    }
     setState((prev) => !prev);
-    console.log(tasks);
   }
+
+  console.log(tasks);
   return (
     <div className="relative">
       <h2 className="text-2xl font-bold text-stone-700 mb-4">Tasks</h2>
@@ -66,25 +68,18 @@ export default function AddTasks({
           <label className="text-red-500 block">Please enter a task</label>
         )}
       </p>
-      {tasks.length === 0 && listOfCompletedTasks === 0 ? (
-        <div className="w-full h-20 flex justify-center items-center">
-          <p>There are no tasks yet for this project.</p>
-        </div>
-      ) : listOfCompletedTasks.length > 0 && tasks.length === 0 ? (
-        <div className="w-full h-max py-4 flex flex-col gap-4 justify-center items-center">
-          <i className="fa-solid fa-champagne-glasses text-5xl text-[#f98538]"></i>
-          <p>Congrats on completing all your tasks!</p>
-		  <img className="absolute -top-[8rem]" src={firework} />
-        </div>
-      ) : (
-        tasks.length > 0 && (
-          <Tasks
-            tasks={tasks}
-            onClear={handleClear}
-            completedTasks={completedTasks}
-          />
-        )
-      )}
+
+      {isNoTasks ? (
+        noTasksHTML
+      ) : isAllTasksCompleted ? (
+        congratsHTML
+      ) : isTasks ? (
+        <Tasks
+          tasks={tasks}
+          onClear={handleClear}
+          updateCompletedTasks={updateCompletedTasks}
+        />
+      ) : null}
     </div>
   );
 }
