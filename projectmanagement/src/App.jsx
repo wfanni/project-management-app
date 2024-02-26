@@ -65,7 +65,7 @@ export default function App() {
   return (
     <div className="font-main">
       <img className="h-[200px] w-full object-cover" src={cover} />
-      <main className="h-screen w-full -mt-8 flex gap-8">
+      <section className="-mt-8 flex gap-8">
         <Aside>
           <AddButton style={`${!isProjectSelected && formVisible ? "selected" : null}`} onAdd={handleAdd} />
           {PROJECTS.length > 0 && (
@@ -83,23 +83,25 @@ export default function App() {
             </ul>
           )}
         </Aside>
-        <div className="w-full mt-16 mr-8">
-          {!formVisible && !isProjectSelected ? (
-            <CreateNewProject onAdd={handleAdd} />
-          ) : null}
-          {!formVisible && isProjectSelected && projectSelected ? (
-            <EditProject
-              index={projectIndex}
-              project={projectSelected}
-              onDelete={handleDelete}
-              tasks={PROJECTS[projectIndex].tasks}
-            />
-          ) : null}
-          {formVisible && !isProjectSelected ? (
-            <AddProjectForm onSave={handleSave} onClose={handleClose} />
-          ) : null}
-        </div>
-      </main>
+        <main className="h-fit mb-20 w-2/3 ml-0 float-right flex justify-end gap-8">
+          <div className="w-full mt-16 pr-8">
+            {!formVisible && !isProjectSelected ? (
+              <CreateNewProject onAdd={handleAdd} />
+            ) : null}
+            {!formVisible && isProjectSelected && projectSelected ? (
+              <EditProject
+                index={projectIndex}
+                project={projectSelected}
+                onDelete={handleDelete}
+                tasks={PROJECTS[projectIndex].tasks}
+              />
+            ) : null}
+            {formVisible && !isProjectSelected ? (
+              <AddProjectForm onSave={handleSave} onClose={handleClose} />
+            ) : null}
+          </div>
+        </main>
+      </section>
       <Footer />
     </div>
   );

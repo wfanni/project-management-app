@@ -58,7 +58,7 @@ export default function AddTasks({
         <p className="text-stone-800 my-4">
           <input
             ref={taskRef}
-            className="w-3/4 px-2 py-1 transition-all duration-200 border-transparent border-2 rounded-md bg-stone-200 outline-none hover:border-[#8b2e44] active:border-[#8b2e44] focus:border-[#8b2e44]"
+            className="w-3/4 px-2 py-1 transition-all duration-200 border-transparent border-2 rounded-md bg-stone-200 outline-none md:w-1/2 hover:border-[#8b2e44] active:border-[#8b2e44] focus:border-[#8b2e44]"
           />
           <button
             type="submit"

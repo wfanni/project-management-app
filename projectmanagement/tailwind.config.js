@@ -11,6 +11,9 @@ export default {
       },
       backgroundImage: {
         'paper': "url('./assets/paper-bg2.jpg')"
+      },
+      minHeight: {
+        '80vh': '80vh'
       }
     }
   },
