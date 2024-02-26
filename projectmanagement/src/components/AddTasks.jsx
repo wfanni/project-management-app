@@ -30,7 +30,8 @@ export default function AddTasks({
     </div>
   );
 
-  function handleAddTask(task) {
+  function handleAddTask(e, task) {
+    e.preventDefault();
     if (task === "") {
       setIsError(true);
     } else {
@@ -53,21 +54,23 @@ export default function AddTasks({
   return (
     <div className="relative">
       <h2 className="text-2xl font-bold text-stone-700 mb-4">Tasks</h2>
-      <p className="text-stone-800 my-4">
-        <input
-          ref={taskRef}
-          className="w-3/4 px-2 py-1 transition-all duration-200 border-transparent border-2 rounded-md bg-stone-200 outline-none hover:border-[#8b2e44] active:border-[#8b2e44] focus:border-[#8b2e44]"
-        />
-        <button
-          onClick={() => handleAddTask(taskRef.current.value)}
-          className="ml-4 py-[0.3rem] px-4 transition-all duration-200 rounded-md bg-[#8b2e44] text-slate-50 hover:bg-[#f98538]"
-        >
-          Add Task
-        </button>
-        {isError && (
-          <label className="text-red-500 block">Please enter a task</label>
-        )}
-      </p>
+      <form onSubmit={(e) => handleAddTask(e, taskRef.current.value)}>
+        <p className="text-stone-800 my-4">
+          <input
+            ref={taskRef}
+            className="w-3/4 px-2 py-1 transition-all duration-200 border-transparent border-2 rounded-md bg-stone-200 outline-none hover:border-[#8b2e44] active:border-[#8b2e44] focus:border-[#8b2e44]"
+          />
+          <button
+            type="submit"
+            className="ml-4 py-[0.3rem] px-4 transition-all duration-200 rounded-md bg-[#8b2e44] text-slate-50 hover:bg-[#f98538]"
+          >
+            Add Task
+          </button>
+          {isError && (
+            <label className="text-red-500 block">Please enter a task</label>
+          )}
+        </p>
+      </form>
 
       {isNoTasks ? (
         noTasksHTML

@@ -20,6 +20,7 @@ export default function App() {
   function handleAdd() {
     setFormVisible(true);
     setIsProjectSelected(false);
+    setProjectSelected(null);
   }
 
   function handleClose() {
