@@ -14,6 +14,9 @@ export default {
       },
       minHeight: {
         '80vh': '80vh'
+      },
+      screens: {
+        'xs': '320px'
       }
     }
   },

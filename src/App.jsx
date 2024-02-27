@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 import AddButton from "./components/AddButton";
 import AddProjectForm from "./components/AddProjectForm";
@@ -68,48 +69,53 @@ export default function App() {
       });
     }
   }
+
+  isVisible ? disableBodyScroll(document) : enableBodyScroll(document)
+
   return (
-    <div className="font-main">
-      <img className="h-[200px] w-full object-cover" src={cover} />
+    <div className={`${isVisible ? "after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-screen after:bg-[#475569b5]" : null} font-main`}>
       {isVisible && <Modal onClose={handleModalClose} title="Hi There" description="Please note that this is a Demo app, still in development. Feel free to reach out to me with suggestions!" oneOption={true} actionButton="Okay, thanks"/>}
-      <section className="-mt-8 flex gap-8">
-        <Aside>
-          <AddButton style={`${!isProjectSelected && formVisible ? "selected" : null}`} onAdd={handleAdd} />
-          {PROJECTS.length > 0 && (
-            <ul>
-              {PROJECTS.map((project, index) => (
-                <li key={project.title} className="font-semibold ">
-                  <button
-                    onClick={() => handleSelect(project, index)}
-                    className={`w-full text-left px-2 py-1 rounded-md my-1 border-2 border-transparent hover:border-[#8b2e44] ${projectSelected === project ? "bg-[#8b2e44] text-slate-50 focus-out:bg-transparent focus-out:text-[#8b2e44]" : null}`}
-                  >
-                    {project.title}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </Aside>
-        <main className="h-fit mb-20 w-2/3 ml-0 float-right flex justify-end gap-8">
-          <div className="w-full mt-16 pr-8">
-            {!formVisible && !isProjectSelected ? (
-              <CreateNewProject onAdd={handleAdd} />
-            ) : null}
-            {!formVisible && isProjectSelected && projectSelected ? (
-              <EditProject
-                index={projectIndex}
-                project={projectSelected}
-                onDelete={handleDelete}
-                tasks={PROJECTS[projectIndex].tasks}
-              />
-            ) : null}
-            {formVisible && !isProjectSelected ? (
-              <AddProjectForm onSave={handleSave} onClose={handleClose} />
-            ) : null}
-          </div>
-        </main>
+      <section>
+        <img className="h-[200px] w-full object-cover" src={cover} />
+        <section className="-mt-8 flex gap-8">
+          <Aside>
+            <AddButton style={`${!isProjectSelected && formVisible ? "selected" : null}`} onAdd={handleAdd} />
+            {PROJECTS.length > 0 && (
+              <ul>
+                {PROJECTS.map((project, index) => (
+                  <li key={project.title} className="font-semibold ">
+                    <button
+                      onClick={() => handleSelect(project, index)}
+                      className={`w-full text-left px-2 py-1 rounded-md my-1 border-2 border-transparent hover:border-[#8b2e44] ${projectSelected === project ? "bg-[#8b2e44] text-slate-50 focus-out:bg-transparent focus-out:text-[#8b2e44]" : null}`}
+                    >
+                      {project.title}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Aside>
+          <main className="h-fit mb-20 w-2/3 ml-0 float-right flex justify-end gap-8">
+            <div className="w-full mt-16 pr-8">
+              {!formVisible && !isProjectSelected ? (
+                <CreateNewProject onAdd={handleAdd} />
+              ) : null}
+              {!formVisible && isProjectSelected && projectSelected ? (
+                <EditProject
+                  index={projectIndex}
+                  project={projectSelected}
+                  onDelete={handleDelete}
+                  tasks={PROJECTS[projectIndex].tasks}
+                />
+              ) : null}
+              {formVisible && !isProjectSelected ? (
+                <AddProjectForm onSave={handleSave} onClose={handleClose} />
+              ) : null}
+            </div>
+          </main>
+        </section>
+        <Footer />
       </section>
-      <Footer />
     </div>
   );
 }
