@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import AddButton from "./components/AddButton";
 import AddProjectForm from "./components/AddProjectForm";
@@ -8,14 +8,21 @@ import EditProject from "./components/EditProject";
 
 import cover from './assets/projects-cover.jpg';
 import Footer from "./components/Footer";
+import Modal from "./components/Modal";
 
 const PROJECTS = [];
 
 export default function App() {
+  
   const [isProjectSelected, setIsProjectSelected] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [projectSelected, setProjectSelected] = useState();
   const [projectIndex, setProjectIndex] = useState();
+  const [isVisible, setIsVisible] = useState(true);
+
+  function handleModalClose() {
+      setIsVisible(false);
+  }
 
   function handleAdd() {
     setFormVisible(true);
@@ -61,10 +68,10 @@ export default function App() {
       });
     }
   }
-
   return (
     <div className="font-main">
       <img className="h-[200px] w-full object-cover" src={cover} />
+      {isVisible && <Modal onClose={handleModalClose} title="Hi There" description="Please note that this is a Demo app, still in development. Feel free to reach out to me with suggestions!" oneOption={true} actionButton="Okay, thanks"/>}
       <section className="-mt-8 flex gap-8">
         <Aside>
           <AddButton style={`${!isProjectSelected && formVisible ? "selected" : null}`} onAdd={handleAdd} />
