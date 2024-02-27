@@ -9,12 +9,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>React Project Manager</title>
-    <script type="module" crossorigin src="/project-management-app/assets/index-a5b82d3b.js"></script>
+    <script type="module" crossorigin src="/project-management-app/assets/main-a5b82d3b.js"></script>
     <link rel="stylesheet" href="/project-management-app/assets/index-e48ca941.css">
   </head>
   <body class="bg-stone-200">
     <div id="modal-root"></div>
     <div id="root"></div>
     
+    <script>
+      (() => {
+        const redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
   </body>
 </html>
