@@ -64,7 +64,7 @@ export default function AddTasks({
             type="submit"
             className="ml-4 py-[0.3rem] px-4 transition-all duration-200 rounded-md bg-[#8b2e44] text-slate-50 hover:bg-[#f98538]"
           >
-            Add Task
+            <i className="fa-solid fa-plus sm:hidden xs:inline-block"></i><span className="xs:hidden sm:inline-block">Add Task</span>
           </button>
           {isError && (
             <label className="text-red-500 block">Please enter a task</label>

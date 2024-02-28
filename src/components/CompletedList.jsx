@@ -1,6 +1,6 @@
 export default function CompletedList({ completedTasks }) {
   return (
-    <div className="p-4 w-1/3 h-fit min-h-60 flex flex-col gap-4 bg-[#ee7763] text-slate-50 shadow-md rounded-xl">
+    <div className="p-4 sm:w-1/3 xs:w-full h-fit sm:min-h-60 xs:h-min-20 flex flex-col gap-4 bg-[#ee7763] text-slate-50 shadow-md rounded-xl">
       {completedTasks && completedTasks.length > 0 ? (
         <h2 className="font-bold text-center">Completed Items</h2>
       ) : null}

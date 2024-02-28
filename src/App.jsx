@@ -20,6 +20,7 @@ export default function App() {
   const [projectSelected, setProjectSelected] = useState();
   const [projectIndex, setProjectIndex] = useState();
   const [isVisible, setIsVisible] = useState(true);
+  const [ isMenuClosed, setIsMenuClosed ] = useState(true);
 
   function handleModalClose() {
       setIsVisible(false);
@@ -76,9 +77,9 @@ export default function App() {
     <div className={`${isVisible ? "after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-screen after:bg-[#475569b5]" : null} font-main`}>
       {isVisible && <Modal onClose={handleModalClose} title="Hi There" description="Please note that this is a Demo app, still in development. Feel free to reach out to me with suggestions!" oneOption={true} actionButton="Okay, thanks"/>}
       <section>
-        <img className="h-[200px] w-full object-cover" src={cover} />
-        <section className="-mt-8 flex gap-8">
-          <Aside>
+        <img className="h-[200px] w-full object-cover xs:h-[125px]" src={cover} />
+        <section className="-mt-8 flex gap-8 min-h-screen">
+          <Aside setClosed={setIsMenuClosed} isClosed={isMenuClosed}>
             <AddButton style={`${!isProjectSelected && formVisible ? "selected" : null}`} onAdd={handleAdd} />
             {PROJECTS.length > 0 && (
               <ul>
@@ -95,8 +96,8 @@ export default function App() {
               </ul>
             )}
           </Aside>
-          <main className="h-fit mb-20 w-2/3 ml-0 float-right flex justify-end gap-8">
-            <div className="w-full mt-16 pr-8">
+          <main className={`h-fit sm:w-2/3 xs:w-full mb-20 ml-0 float-right flex justify-end gap-8`}>
+            <div className="w-full mt-16 sm:pr-8 xs:px-4">
               {!formVisible && !isProjectSelected ? (
                 <CreateNewProject onAdd={handleAdd} />
               ) : null}

@@ -20,8 +20,8 @@ export default function EditProject({ project, index, onDelete, tasks }) {
   }
 
   return (
-    <div className="flex gap-4">
-      <div className="w-2/3 p-4 bg-slate-50 rounded-xl shadow-lg">
+    <div className="flex gap-4 sm:flex-row xs:flex-col xs:justify-center xs:align-center">
+      <div className="sm:w-2/3 xs:w-full p-4 bg-slate-50 rounded-xl shadow-lg">
         <header className="pb-4 mb-4 border-b-2 border-[#8b2e44]">
           <div className="flex items-center justify-between">
             <h1 className="text-3xl font-bold text-stone-600 mb-2">
