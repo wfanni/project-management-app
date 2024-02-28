@@ -74,7 +74,7 @@ export default function App() {
   isVisible ? disableBodyScroll(document) : enableBodyScroll(document)
 
   return (
-    <div className={`${isVisible ? "after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-screen after:bg-[#475569b5]" : null} font-main`}>
+    <div className={`${isVisible ? "after:content-[''] after:z-10 after:absolute after:top-0 after:left-0 after:w-full after:h-screen after:bg-[#475569b5]" : null} font-main`}>
       {isVisible && <Modal onClose={handleModalClose} title="Hi There" description="Please note that this is a Demo app, still in development. Feel free to reach out to me with suggestions!" oneOption={true} actionButton="Okay, thanks"/>}
       <section>
         <img className="h-[200px] w-full object-cover xs:h-[125px]" src={cover} />
