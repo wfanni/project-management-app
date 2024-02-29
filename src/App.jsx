@@ -30,6 +30,7 @@ export default function App() {
     setFormVisible(true);
     setIsProjectSelected(false);
     setProjectSelected(null);
+    setIsMenuClosed(true);
   }
 
   function handleClose() {
@@ -42,6 +43,7 @@ export default function App() {
     setFormVisible(false);
     setProjectSelected(project);
     setProjectIndex(index);
+    setIsMenuClosed(true);
   }
 
   function handleDelete(index) {
@@ -69,6 +71,10 @@ export default function App() {
         tasks: {new: [], completed: []}, 
       });
     }
+    setTimeout(() => {
+      handleSelect(PROJECTS[PROJECTS.length - 1], PROJECTS.indexOf(PROJECTS[PROJECTS.length - 1]));
+      console.log(projectSelected)
+    }, 100);
   }
 
   isVisible ? disableBodyScroll(document) : enableBodyScroll(document)
@@ -86,7 +92,7 @@ export default function App() {
                 {PROJECTS.map((project, index) => (
                   <li key={project.title} className="font-semibold ">
                     <button
-                      onClick={() => handleSelect(project, index)}
+                      onClick={() => {handleSelect(project, index); setIsMenuClosed(true)}}
                       className={`w-full text-left px-2 py-1 rounded-md my-1 border-2 border-transparent hover:border-[#8b2e44] ${projectSelected === project ? "bg-[#8b2e44] text-slate-50 focus-out:bg-transparent focus-out:text-[#8b2e44]" : null}`}
                     >
                       {project.title}
@@ -110,7 +116,7 @@ export default function App() {
                 />
               ) : null}
               {formVisible && !isProjectSelected ? (
-                <AddProjectForm onSave={handleSave} onClose={handleClose} />
+                <AddProjectForm onSave={handleSave} onClose={handleClose} selectCurrentProject={() => handleSelect(project, index)} />
               ) : null}
             </div>
           </main>

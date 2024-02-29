@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export default function AddProjectForm({ onSave, onClose }) {
+export default function AddProjectForm({ onSave, onClose, closeMenu }) {
   const title = useRef();
   const desc = useRef();
   const date = useRef();
