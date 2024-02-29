@@ -90,13 +90,14 @@ export default function App() {
             {PROJECTS.length > 0 && (
               <ul>
                 {PROJECTS.map((project, index) => (
-                  <li key={project.title} className="font-semibold ">
+                  <li key={project.title} className={`font-semibold group flex justify-between w-full px-2 py-1 rounded-md my-1 border-2 border-transparent hover:border-[#8b2e44] ${projectSelected === project ? "bg-[#8b2e44] text-slate-50 focus-out:bg-transparent focus-out:text-[#8b2e44]" : null}`}>
                     <button
                       onClick={() => {handleSelect(project, index); setIsMenuClosed(true)}}
-                      className={`w-full text-left px-2 py-1 rounded-md my-1 border-2 border-transparent hover:border-[#8b2e44] ${projectSelected === project ? "bg-[#8b2e44] text-slate-50 focus-out:bg-transparent focus-out:text-[#8b2e44]" : null}`}
+                      className="w-[inherit] text-left"
                     >
-                      {project.title}
+                      <span>{project.title}</span>
                     </button>
+                    <button className="w-fit ml-2 leading-[normal] transition-all duration-200 opacity-0 group-hover:opacity-100" onClick={() => handleDelete(index)}><i class="fa-solid fa-xmark"></i></button>
                   </li>
                 ))}
               </ul>
