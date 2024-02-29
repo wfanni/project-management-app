@@ -17,6 +17,15 @@ export default {
       },
       screens: {
         'xs': '320px'
+      },
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'translateX(-0.5rem) translate(-50%,-50%)' },
+          '50%': { transform: 'translateX(0.5rem) translate(-50%,-50%)' },
+        }
+      },
+      animation: {
+        wiggle: 'wiggle 0.2s ease-in-out 2',
       }
     }
   },

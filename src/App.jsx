@@ -19,11 +19,17 @@ export default function App() {
   const [formVisible, setFormVisible] = useState(false);
   const [projectSelected, setProjectSelected] = useState();
   const [projectIndex, setProjectIndex] = useState();
-  const [isVisible, setIsVisible] = useState(true);
+  const [isWIPVisible, setIsWIPVisible] = useState(true);
   const [ isMenuClosed, setIsMenuClosed ] = useState(true);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState({isVisible: false, index: null});
 
   function handleModalClose() {
-      setIsVisible(false);
+      setIsWIPVisible(false);
+  }
+
+  function handleDeleteModal(index) {
+    setIsDeleteModalVisible({isVisible: true, index: index});
+    console.log(isDeleteModalVisible);
   }
 
   function handleAdd() {
@@ -51,6 +57,7 @@ export default function App() {
     console.log("project at " + index + " index deleted");
     setFormVisible(false);
     setIsProjectSelected(false);
+    setIsDeleteModalVisible(false);
   }
 
   function handleSave(newTitle, newDesc, newDate) {
@@ -77,11 +84,13 @@ export default function App() {
     }, 100);
   }
 
-  isVisible ? disableBodyScroll(document) : enableBodyScroll(document)
+  isWIPVisible ? disableBodyScroll(document) : enableBodyScroll(document);
+  isDeleteModalVisible ? disableBodyScroll(document) : enableBodyScroll(document);
 
   return (
-    <div className={`${isVisible ? "after:content-[''] after:z-10 after:absolute after:top-0 after:left-0 after:w-full after:h-screen after:bg-[#475569b5]" : null} font-main`}>
-      {isVisible && <Modal onClose={handleModalClose} title="Hi There" description="Please note that this is a Demo app, still in development. Feel free to reach out to me with suggestions!" oneOption={true} actionButton="Okay, thanks"/>}
+    <div className={`${isWIPVisible || isDeleteModalVisible.isVisible ? "after:content-[''] after:z-10 after:absolute after:top-0 after:left-0 after:w-full after:h-screen after:bg-[#475569b5]" : null} font-main`}>
+      {isWIPVisible && <Modal isWIPVisible={isWIPVisible} setWIPVisible={handleModalClose} title="Hi There" description="Please note that this is a Demo app, still in development. Feel free to reach out to me with suggestions!" oneOption={true} actionButton="Okay, thanks"/>}
+      {isDeleteModalVisible.isVisible && <Modal onDelete={() => handleDelete(isDeleteModalVisible.index)} isDeleteVisible={isDeleteModalVisible.isVisible} setDeleteVisible={setIsDeleteModalVisible} title="Are you sure?" description="Do you really want to delete this project?" oneOption={false} actionButton="Yes" closeButton="No"/>}
       <section>
         <img className="h-[200px] w-full object-cover xs:h-[125px]" src={cover} />
         <section className="-mt-8 flex gap-8 min-h-screen">
@@ -97,7 +106,7 @@ export default function App() {
                     >
                       <span>{project.title}</span>
                     </button>
-                    <button className="w-fit ml-2 leading-[normal] transition-all duration-200 opacity-0 group-hover:opacity-100" onClick={() => handleDelete(index)}><i class="fa-solid fa-xmark"></i></button>
+                    <button className="w-fit ml-2 leading-[normal] transition-all duration-200 opacity-0 group-hover:opacity-100" onClick={() => handleDeleteModal(index)}><i className="fa-solid fa-xmark"></i></button>
                   </li>
                 ))}
               </ul>
@@ -112,12 +121,12 @@ export default function App() {
                 <EditProject
                   index={projectIndex}
                   project={projectSelected}
-                  onDelete={handleDelete}
                   tasks={PROJECTS[projectIndex].tasks}
+                  setDeleteModal={setIsDeleteModalVisible}
                 />
               ) : null}
               {formVisible && !isProjectSelected ? (
-                <AddProjectForm onSave={handleSave} onClose={handleClose} selectCurrentProject={() => handleSelect(project, index)} />
+                <AddProjectForm onSave={handleSave} onClose={handleClose} />
               ) : null}
             </div>
           </main>
