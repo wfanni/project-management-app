@@ -2,7 +2,7 @@ import { useState } from "react";
 import AddTasks from "./AddTasks";
 import CompletedList from "./CompletedList";
 
-export default function EditProject({ project, index, tasks,  setDeleteModal }) {
+export default function EditProject({ project, index, tasks,  setDeleteModal, setDoneModal }) {
   const [, setRefresh] = useState(false);
   
   function handleCompletedTasks(newCompletedTask, index) {
@@ -18,10 +18,6 @@ export default function EditProject({ project, index, tasks,  setDeleteModal }) 
     setRefresh(prev => !prev);
   }
 
-  function handleDeleteConfirmation(index) {
-    setDeleteModal({isVisible: true, index: index});
-  }
-
   return (
     <div className="flex gap-4 sm:flex-row xs:flex-col xs:justify-center xs:align-center">
       <div className="sm:w-2/3 xs:w-full p-4 bg-slate-50 rounded-xl shadow-lg">
@@ -31,7 +27,7 @@ export default function EditProject({ project, index, tasks,  setDeleteModal }) 
               {project.title}
             </h1>
             <button
-              onClick={() => handleDeleteConfirmation(index)}
+              onClick={() => setDeleteModal({isVisible: true, index: index})}
               className="text-stone-700 hover:text-red-500"
             >
               Delete
@@ -50,6 +46,7 @@ export default function EditProject({ project, index, tasks,  setDeleteModal }) 
           tasks={tasks.new}
           completedTasks={tasks.completed}
           updateCompletedTasks={handleCompletedTasks}
+          setDoneModal={setDoneModal}
         />
       </div>
       <CompletedList completedTasks={tasks.completed}/>

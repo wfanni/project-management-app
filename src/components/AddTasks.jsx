@@ -6,6 +6,7 @@ export default function AddTasks({
   tasks,
   completedTasks,
   updateCompletedTasks,
+  setDoneModal
 }) {
   const taskRef = useRef();
 
@@ -78,6 +79,7 @@ export default function AddTasks({
           tasks={tasks}
           onClear={handleClear}
           updateCompletedTasks={updateCompletedTasks}
+          setDoneModal={setDoneModal}
         />
       ) : null}
     </div>

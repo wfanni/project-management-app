@@ -1,4 +1,9 @@
-export default function Tasks({ tasks, onClear, updateCompletedTasks }) {
+export default function Tasks({ tasks, onClear, updateCompletedTasks, setDoneModal }) {
+
+  function handleCheckboxChange(task, index) {
+    updateCompletedTasks(task, index);
+    setTimeout(() => setDoneModal(true), 3500);
+  }
   return (
     <ul className="p-4 mt-8 rounded-md bg-paper">
       {tasks &&
@@ -9,7 +14,7 @@ export default function Tasks({ tasks, onClear, updateCompletedTasks }) {
               className="flex justify-between p-2 rounded-md font-regular hover:bg-[#ffffff75]"
             >
               <div className="flex gap-2">
-                <input onChange={() => updateCompletedTasks(task, index)} type="checkbox" value={task} />
+                <input onChange={() => handleCheckboxChange(task, index)} type="checkbox" value={task} />
                 <span>{task}</span>
               </div>
               <button
