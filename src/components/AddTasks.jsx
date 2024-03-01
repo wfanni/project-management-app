@@ -36,8 +36,6 @@ export default function AddTasks({
       setIsError(true);
     } else {
       tasks.push(task);
-      console.log(tasks);
-      console.log(tasks.length);
       setState((prev) => !prev);
 
       setIsError(false);
@@ -50,7 +48,6 @@ export default function AddTasks({
     setState((prev) => !prev);
   }
 
-  console.log(tasks);
   return (
     <div className="relative">
       <h2 className="text-2xl font-bold text-stone-700 mb-4">Tasks</h2>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import AddTasks from "./AddTasks";
 import CompletedList from "./CompletedList";
 
-export default function EditProject({ project, index, tasks, setDeleteModal }) {
+export default function EditProject({ project, index, tasks,  setDeleteModal }) {
   const [, setRefresh] = useState(false);
   
   function handleCompletedTasks(newCompletedTask, index) {
@@ -10,7 +10,6 @@ export default function EditProject({ project, index, tasks, setDeleteModal }) {
       tasks.completed.push(newCompletedTask);
 
       tasks.completed.forEach((completedTask) => {
-        console.log(completedTask);
         if (completedTask === tasks.new[index]) {
           tasks.new.splice(index, 1);
         }

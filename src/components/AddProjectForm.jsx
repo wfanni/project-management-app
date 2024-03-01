@@ -1,9 +1,16 @@
 import { useRef } from "react";
 
-export default function AddProjectForm({ onSave, onClose, closeMenu }) {
+export default function AddProjectForm({ onSave, onClose }) {
   const title = useRef();
   const desc = useRef();
   const date = useRef();
+
+  let today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const yyyy = today.getFullYear();
+
+  today = yyyy + '-' + mm + '-' + dd;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -64,6 +71,7 @@ export default function AddProjectForm({ onSave, onClose, closeMenu }) {
           ref={date}
           required
           type="date"
+          min={today}
           className="relative w-full p-1 indent-4 transition-all duration-200 border-transparent border-2 rounded-md bg-stone-200 outline-none hover:border-[#8b2e44] active:border-[#8b2e44] focus:border-[#8b2e44]"
         />
       </p>
